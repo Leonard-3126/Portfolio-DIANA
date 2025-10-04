@@ -1,0 +1,882 @@
+@media (max-width:900px) {
+	.nav {
+		display: none !important;
+	}
+}
+/* --- Dropdown de idioma (flags) --- */
+.lang-dropdown {
+	position: relative;
+	display: inline-block;
+}
+.lang-dropdown-btn {
+	background: #fff;
+	border: none;
+	padding: 2px 10px 2px 2px;
+	border-radius: 8px;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+	transition: box-shadow 0.2s;
+	min-width: 44px;
+	position: relative;
+}
+.lang-dropdown-btn:focus {
+	outline: 2px solid #7a5cff;
+}
+.lang-flag-img-main {
+	width: 32px;
+	height: 22px;
+	object-fit: cover;
+	display: block;
+	border-radius: 4px;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.lang-dropdown-arrow {
+	margin-left: 6px;
+	font-size: 16px;
+	color: #444;
+	user-select: none;
+}
+.lang-dropdown-list {
+	display: none;
+	position: absolute;
+	top: 110%;
+	left: 0;
+	background: #fff;
+	border-radius: 8px;
+	box-shadow: 0 6px 24px rgba(10,8,20,0.10);
+	padding: 6px 0;
+	min-width: 44px;
+	z-index: 200;
+}
+.lang-dropdown.open .lang-dropdown-list {
+	display: block;
+}
+.lang-flag {
+	background: none;
+	border: none;
+	padding: 2px 12px;
+	width: 100%;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 15px;
+	transition: background 0.15s;
+}
+.lang-flag:hover, .lang-flag:focus {
+	background: #f3f3fa;
+}
+.lang-flag-img {
+	width: 28px;
+	height: 20px;
+	object-fit: cover;
+	border-radius: 3px;
+	box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+/* Efecto de sacudida para los logos de plataformas */
+.platform-icon img {
+	transition: transform 0.2s;
+}
+.platform-card:hover .platform-icon img {
+	animation: shake-logo 0.4s cubic-bezier(.36,.07,.19,.97) both;
+}
+@keyframes shake-logo {
+	10%, 50% { transform: translateX(-2px); }
+	20%, 40% { transform: translateX(4px); }
+	30%, 50%, 70% { transform: translateX(-6px); }
+	40%, 80% { transform: translateX(6px); }
+	100% { transform: none; }
+}
+/* Fondo decorativo para tarjetas de plataformas */
+.platform-card.behance {
+	background: url('../fondo/behance.png') no-repeat top right/500px auto, #fff;
+}
+.platform-card.instagram {
+	background: url('../fondo/instagram.png') no-repeat top right/500px auto, #fff;
+}
+.platform-card.linkedin {
+	background: url('../fondo/linkedin.png') no-repeat top right/500px auto, #fff;
+}
+/* Logos de plataformas en tarjetas */
+.platform-icon img {
+	width: 40px;
+	height: 40px;
+	object-fit: contain;
+	display: block;
+}
+/* Centrar contenido de tarjetas de plataformas */
+.platform-card {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
+.platform-card .platform-head,
+.platform-card .platform-title,
+.platform-card .platform-sub {
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+.platform-card .platform-icon {
+	margin-bottom: 8px;
+}
+.platform-card .platform-stats {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	gap: 32px;
+}
+.platform-card .pstat {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+/* Efecto de acercamiento en imágenes de tarjetas de proyectos */
+.project .thumb {
+	transition: transform 0.4s cubic-bezier(.4,0,.2,1), box-shadow 0.3s;
+	cursor: pointer;
+}
+.project .thumb:hover, .project a:hover .thumb {
+	transform: scale(1.08);
+	box-shadow: 0 8px 32px rgba(122,92,255,0.18);
+	z-index: 2;
+}
+/* --- Protección visual para edición admin --- */
+.edit-admin {
+	display: none !important;
+}
+body.is-admin .edit-admin {
+	display: inline-block !important;
+}
+body.is-admin .edit-admin.card-edit-panel,
+body.is-admin .edit-admin.project-edit-panel,
+body.is-admin .edit-admin.profile-edit-panel {
+	display: block !important;
+}
+/* Modal admin estilos limpios */
+.modal-overlay {
+	position: fixed;
+	top: 0; left: 0; right: 0; bottom: 0;
+	background: rgba(40,30,60,0.18);
+	z-index: 9999;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.modal-admin {
+	background: #fff;
+	border-radius: 18px;
+	box-shadow: 0 8px 32px rgba(180,108,255,0.10);
+	max-width: 400px;
+	width: 100%;
+	position: relative;
+	margin: 0 auto;
+}
+.modal-close {
+	position: absolute;
+	top: 18px;
+	right: 22px;
+	font-size: 22px;
+	background: none;
+	border: none;
+	color: #b46cff;
+	cursor: pointer;
+}
+.modal-admin-inner {
+	padding: 38px 32px 28px 32px;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+}
+.admin-title {
+	font-size: 22px;
+	font-weight: 900;
+	color: #b46cff;
+	margin-bottom: 8px;
+	text-align: center;
+}
+.admin-desc {
+	font-size: 15px;
+	color: #666;
+	margin-bottom: 22px;
+	text-align: center;
+}
+.admin-field {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	margin-bottom: 12px;
+}
+.admin-field label {
+	font-size: 14px;
+	color: #444;
+	font-weight: 700;
+}
+.admin-field input {
+	padding: 8px 12px;
+	border-radius: 8px;
+	border: 1px solid #e0e0e0;
+	font-size: 15px;
+}
+.admin-actions {
+	display: flex;
+	justify-content: center;
+	gap: 12px;
+	margin-top: 10px;
+}
+.btn-admin {
+	background: linear-gradient(90deg,#b46cff,#ffb24d);
+	color: #fff;
+	font-weight: 700;
+	padding: 8px 24px;
+	border-radius: 8px;
+	border: none;
+	box-shadow: 0 2px 8px rgba(180,108,255,0.08);
+	cursor: pointer;
+}
+.btn-cancel {
+	background: #eee;
+	color: #333;
+	font-weight: 700;
+	padding: 8px 18px;
+	border-radius: 8px;
+	border: none;
+	cursor: pointer;
+}
+/* Efecto sutil de engrandecimiento para cada letra del logo */
+.brand .brand-letter {
+	display: inline-block;
+	background: linear-gradient(90deg,#ff4da6 0%, #7a5cff 60%);
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+	font-weight:900;
+	font-size:25px;
+	letter-spacing:2px;
+	transition: transform 0.18s cubic-bezier(.4,0,.2,1);
+	cursor: pointer;
+}
+.brand .brand-letter:hover {
+	transform: scale(1.13);
+}
+/* Asegurar que la 'O' del logo no desaparezca al pasar el mouse */
+.brand #brandF {
+	background: linear-gradient(90deg,#ff4da6 0%, #7a5cff 60%);
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent !important;
+	opacity: 1 !important;
+	transition: transform 0.2s;
+	cursor: pointer;
+}
+.brand #brandF:hover {
+	color: transparent !important;
+	opacity: 1 !important;
+	transform: scale(1.12);
+}
+:root{
+	--accent1:#ff4da6;
+	--accent2:#7a5cff;
+	--muted:#6b6f85;
+	--bg:#fff7f8;
+	--glass: rgba(255,255,255,0.7);
+	font-synthesis: none;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+	margin:0;
+	padding-top:72px; /* espacio para header fijo */
+	font-family:Inter, "Segoe UI", Roboto, system-ui, -apple-system;
+	background:linear-gradient(135deg,#fff6f7 0%,#fffdfb 100%);
+	color:#222;
+	-webkit-font-smoothing:antialiased;
+	-moz-osx-font-smoothing:grayscale;
+}
+.container{max-width:1180px;margin:0 auto;padding:24px}
+
+.site-header{
+	position:fixed; /* fijado en la parte superior */
+	top:0;
+	left:0;
+	right:0;
+	z-index:1200;
+	background:rgba(255,255,255,0.9);
+	backdrop-filter:blur(6px);
+	box-shadow:0 2px 8px rgba(10,8,12,0.04)
+}
+.header-inner{display:flex;align-items:center;justify-content:space-between;}
+.brand{
+	font-weight:900;
+	letter-spacing:2px;
+	font-size:20px; /* ajustar según preferencia */
+	/* degradado de color en el texto */
+	background: linear-gradient(90deg, #ff4da6 0%, #7a5cff 60%);
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+
+	/* sombras y trazo sutil para el efecto "resaltado" */
+	text-shadow:
+		0 1px 0 rgba(255,255,255,0.15),   /* ligero brillo superior */
+		0 6px 18px rgba(122,92,255,0.12); /* sombra difusa */
+	-webkit-text-stroke: 0.2px rgba(0,0,0,0.06);
+
+	display:inline-block;
+}
+.nav a{margin:0 12px;color:#333;text-decoration:none;font-weight:600}
+.btn.contact{background:linear-gradient(90deg,var(--accent1),#ffb24d);padding:8px 16px;border-radius:8px;color:white;text-decoration:none;font-weight:700}
+
+.hero{
+	padding:100px 0 80px;
+	background:linear-gradient(135deg,#ff6ea1 0%, #7a5cff 60%);
+	color:#fff;
+	text-align:center;
+	position:relative;
+	overflow:hidden;
+}
+.hero-inner{max-width:900px;margin:0 auto}
+.hero h1{font-size:64px;margin:0;line-height:0.9; font-weight:900;letter-spacing:1px}
+
+@media (max-width:900px) {
+	.hero h1 {
+		line-height: 3.9;
+	}
+}
+.hero .big{font-size:120px;opacity:0.12;display:block;font-weight:900}
+.lead{opacity:0.95;margin:18px auto 28px;color:rgba(255,255,255,0.95);font-weight:500}
+.bg-word{
+		 position:absolute;
+		 top:90px;
+		 left:50%;
+		 transform:translateX(-50%);
+		 font-size:260px;
+		 letter-spacing:10px;
+		 font-weight:900;
+		 line-height:0.75;
+		 opacity:0.70;
+		 pointer-events:none;
+		 -webkit-background-clip: text;
+		 background: linear-gradient(90deg,#ff6ea1 0%, #7a5cff 60%);
+		 background-clip: text;
+		 color: rgba(221, 220, 205, 0.313);
+		 white-space:nowrap;
+	}
+
+	@media (max-width:900px) {
+		.bg-word {
+			top: 120px;
+			font-size: 110px;
+		}
+	}
+	@media (max-width:600px) {
+		.bg-word {
+			top: 90px;
+			font-size: 60px;
+		}
+	}
+
+.hero-title{
+	font-size:48px;
+	margin:10px 0 8px;
+	font-weight:900;
+	letter-spacing:2px;
+	color: #fff;
+	text-shadow: 0 6px 30px rgba(0,0,0,0.12);
+}
+
+.hero-cards{display:flex;justify-content:center;gap:22px;margin:28px auto 18px;flex-wrap:wrap}
+.card.small{background:rgba(255,255,255,0.08);padding:14px 20px;border-radius:14px;backdrop-filter: blur(4px)}
+.card.large{
+	width:280px;
+	background: rgba(255,255,255,0.06);
+	border: 1px solid rgba(255,255,255,0.12);
+	padding:22px;
+	border-radius:14px;
+	backdrop-filter: blur(8px);
+	box-shadow: 0 8px 30px rgba(10,8,20,0.08);
+	color:#fff;
+	text-align:center;
+}
+.card.large .icon{
+	font-size:28px;
+	margin-bottom:10px;
+}
+.card.large h3{
+	margin:6px 0;
+	font-size:14px;
+	letter-spacing:1px;
+	font-weight:800;
+}
+.card.large p{
+	margin:6px 0 0;
+	color:rgba(255,255,255,0.9);
+	font-size:13px;
+	opacity:0.95;
+}
+
+.section-title{text-align:center;font-size:42px;margin:48px 0 8px;color:var(--accent1);font-weight:900}
+.section-desc{max-width:760px;margin:0 auto 28px;text-align:center;color:var(--muted)}
+
+.sobre-grid{display:grid;grid-template-columns:1fr 360px;gap:0px;align-items:start}
+.tabs{background:#fff;border-radius:12px;padding:18px;box-shadow:0 6px 22px rgba(12,10,20,0.06)}
+.tabs-header{display:flex;gap:10px;margin-bottom:14px}
+.tab-btn{
+	background: transparent;
+	color: var(--muted);
+	border: 1px solid transparent;
+	padding:10px 14px;
+	border-radius:12px;
+	cursor:pointer;
+	font-weight:700;
+}
+.tab-btn:hover{ background: rgba(250,250,252,0.6); }
+
+.tab-btn.active{
+	background: #fff;
+	color: var(--accent1);
+	border: 2px solid var(--accent1);
+	box-shadow: 0 8px 24px rgba(122,92,255,0.08);
+	padding:8px 12px; /* mantener tamaño visual al aplicar border */
+}
+.tab{display:none}
+.tab.active{display:block}
+.stats-grid{
+	display:grid;
+	grid-template-columns:repeat(2,1fr);
+	gap:14px;
+	margin-top:18px;
+}
+.stat{
+	background:#fff;
+	padding:18px;
+	border-radius:12px;
+	box-shadow: 0 10px 26px rgba(12,10,20,0.06);
+	display:flex;
+	flex-direction:column;
+	justify-content:space-between;
+	min-height:110px;
+}
+.stat-top{
+	display:flex;
+	align-items:center;
+	gap:12px;
+}
+.stat .icon{
+	font-size:22px;
+	width:40px;
+	height:40px;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	border-radius:10px;
+	background: linear-gradient(90deg, rgba(255,77,166,0.08), rgba(122,92,255,0.06));
+}
+.stat .value strong{
+	color: var(--accent1);
+	font-size:20px;
+	display:block;
+}
+.stat .label{
+	margin-top:8px;
+	color:var(--muted);
+	font-size:13px;
+}
+
+.profile-card{
+	background:linear-gradient(135deg,#efe0e9,#e9e6f6);
+	padding:80px; /* aumentado para más espacio alrededor */
+	border-radius:14px;
+	text-align:center
+}
+.avatar-gradient{
+	width:320px;    /* antes 160px */
+	height:500px;   /* antes 160px */
+	margin:0 auto 18px; /* espacio inferior un poco mayor */
+	border-radius:30px; /* mantener esquinas suaves */
+	background:linear-gradient(135deg,#ffd1e6,#b9a3ff);
+	display:flex;
+	align-items:center;
+	justify-content:center
+}
+
+.proyectos .cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:24px}
+.project{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 8px 30px rgba(10,8,12,0.05)}
+.project .thumb{
+	height:180px;
+	background-size:cover;
+	background-position:center;
+}
+.project-body{padding:18px}
+.tag{display:inline-block;font-size:12px;background:#fff3f6;padding:6px 10px;border-radius:999px;margin-bottom:8px}
+.project h4{margin:6px 0}
+.meta{display:flex;gap:12px;color:var(--muted);margin-top:12px;font-size:13px}
+
+.platforms-grid{
+	display:grid;
+	grid-template-columns:repeat(3,1fr);
+	gap:18px;
+	margin-top:22px;
+}
+
+.platform-card{
+	background:#fff;
+	border-radius:12px;
+	padding:18px;
+	box-shadow:0 14px 40px rgba(12,10,20,0.04);
+	border:1px solid rgba(0,0,0,0.03);
+	display:flex;
+	flex-direction:column;
+	justify-content:space-between;
+	min-height:140px;
+}
+
+.platform-head{
+	display:flex;
+	align-items:center;
+	gap:12px;
+	margin-bottom:12px;
+}
+.platform-icon{
+	width:46px;height:46px;border-radius:10px;display:flex;align-items:center;justify-content:center;
+	background: linear-gradient(90deg, rgba(255,77,166,0.08), rgba(122,92,255,0.06));
+	font-size:20px;
+	color:var(--accent1);
+}
+.platform-title{font-weight:800;font-size:22px;color:#ffffff}
+.platform-sub{font-size:16px;color:#ffffff;margin-top:4px}
+
+/* línea separadora */
+.platform-card hr{
+	border:0;border-top:1px solid rgba(0,0,0,0.04);margin:12px 0;
+}
+
+/* stats row */
+.platform-stats{display:flex;justify-content:space-between;gap:12px}
+.pstat{flex:1;text-align:center}
+.pval{color:var(--accent1);font-weight:800;font-size:16px}
+.plabel{font-size:12px;color:var(--muted);margin-top:6px;display:block}
+
+/* summary metrics */
+.platforms-summary{
+	display:flex;
+	justify-content:center;
+	gap:36px;
+	margin-top:28px;
+	align-items:center;
+	/* permitir que los ítems hagan wrap en varias filas en lugar de carrusel */
+	flex-wrap:wrap;
+	overflow-x:visible;
+	padding:6px 12px;
+}
+
+/* estilo por ítem: icono circular, número grande y etiqueta pequeña */
+.sum-item{
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	gap:8px;
+	min-width:120px;
+	flex: 0 1 auto; /* permitir que los ítems se reduzcan y envuelvan */
+}
+
+/* scroll visual pequeño y cómodo */
+.platforms-summary::-webkit-scrollbar{height:6px}
+.platforms-summary::-webkit-scrollbar-thumb{background:rgba(0,0,0,0.06);border-radius:6px}
+
+/* responsive: reducir gap y anchos en móvil */
+@media (max-width:700px){
+	.platforms-summary{gap:20px;padding:8px}
+	.sum-item{min-width:100px}
+	.sum-num{font-size:16px}
+	.sum-icon{width:36px;height:36px;font-size:16px}
+}
+
+/* responsive */
+@media (max-width:1100px){
+	.platforms-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:700px){
+	.platforms-grid{grid-template-columns:1fr}
+	.platform-card{min-height:auto}
+	.platforms-summary{gap:18px}
+}
+
+/* nuevas reglas para habilidades y herramientas */
+.skills-list{margin-top:12px;display:flex;flex-direction:column;gap:14px}
+.skill-row{display:flex;flex-direction:column;gap:8px}
+.skill-left{display:flex;align-items:center;justify-content:space-between}
+.skill-label{font-weight:800;color:#222}
+.skill-percent{color:var(--muted);font-weight:700}
+
+/* barra de progreso personalizada */
+.skill-bar{
+	background:#f1f2f4;
+	border-radius:999px;
+	height:12px;
+	overflow:hidden;
+}
+.skill-fill{
+	height:100%;
+	border-radius:999px;
+	/* degradado y sombra para el relleno */
+	background: linear-gradient(90deg, #ff6ea1 0%, #ffb24d 40%, #7a5cff 100%);
+	box-shadow: 0 6px 16px rgba(122,92,255,0.08);
+	transition: width 800ms cubic-bezier(.2,.9,.2,1);
+}
+
+/* caja de herramientas (fondito rosado con pills) */
+.tools-box{
+	margin-top:20px;
+	background: linear-gradient(180deg, rgba(255,235,238,0.9), rgba(242,233,251,0.85));
+	padding:18px;
+	border-radius:12px;
+	box-shadow: 0 10px 30px rgba(12,10,20,0.04);
+}
+.tools-box h4{margin:0 0 10px;font-size:16px;color:#212121;font-weight:800}
+.tools{display:flex;flex-wrap:wrap;gap:10px}
+.tool{
+	background:#fff;
+	padding:8px 12px;
+	border-radius:999px;
+	font-size:13px;
+	box-shadow: 0 6px 18px rgba(12,10,20,0.04);
+	color:#222;
+}
+
+/* estilos para la sección de filosofía */
+.philosophy{padding:6px 2px}
+.philosophy-text p{
+	margin:10px 0;
+	color:#3b3b44;
+	line-height:1.5;
+	font-size:15px;
+}
+.philosophy-text p strong{
+	color:var(--accent1);
+	font-weight:800;
+	margin-right:6px;
+}
+
+/* tarjetas bajo el texto */
+.philosophy-cards{
+	display:grid;
+	grid-template-columns:repeat(2,1fr);
+	gap:16px;
+	margin-top:18px;
+}
+.philosophy-card{
+	background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.96));
+	border-radius:12px;
+	padding:18px;
+	min-height:120px;
+	box-shadow: 0 18px 40px rgba(12,10,20,0.04);
+	border:1px solid rgba(0,0,0,0.03);
+	display:flex;
+	flex-direction:column;
+	justify-content:space-between;
+}
+
+/* encabezado de la card */
+.card-head{display:flex;align-items:center;gap:12px}
+.card-icon{
+	width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;
+	font-size:20px;
+	box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+}
+.card-title{margin:0;font-weight:800;font-size:16px;color:#222}
+.card-desc{margin-top:8px;color:var(--muted);font-size:14px}
+
+/* variantes de color */
+.card-pink{border:1px solid rgba(255,110,161,0.12)}
+.card-pink .card-icon{background:linear-gradient(90deg, rgba(255,77,166,0.14), rgba(122,92,255,0.06)); color:var(--accent1)}
+
+.card-yellow{border:1px solid rgba(255,200,120,0.12)}
+.card-yellow .card-icon{background:linear-gradient(90deg, rgba(255,235,180,0.9), rgba(255,240,220,0.6)); color:#d28f2b}
+
+/* visual pequeño: borde destacable similar al ejemplo */
+.philosophy-card::before{
+	content:"";
+	position:absolute;
+	/* placeholder: none by default; cards are visually light */
+}
+
+/* ajustes responsive */
+@media (max-width:560px){
+	.skill-left{gap:10px}
+	.skill-label{font-size:15px}
+	.skill-percent{font-size:13px}
+	.tools{gap:8px}
+	.tool{font-size:12px;padding:7px 10px}
+}
+
+/* responsive ajuste */
+@media (max-width:900px){
+	.sobre-grid{grid-template-columns:1fr;gap:18px}
+	.hero h1{font-size:44px}
+	.hero .big{display:none}
+	.proyectos .cards-grid{grid-template-columns:1fr}
+	.platforms-grid{grid-template-columns:repeat(2,1fr)}
+	.header-inner{gap:8px;flex-wrap:wrap}
+	.bg-word{font-size:110px;top:6px}
+	.card.large{width:90%;max-width:380px}
+	.hero-title{font-size:36px}
+	.proyectos .section-title{ font-size:36px }
+}
+
+@media (max-width:700px){
+	.philosophy-cards{grid-template-columns:1fr}
+	.philosophy-text p{font-size:14px}
+	.card-head{gap:10px}
+	.card-icon{width:40px;height:40px;font-size:18px}
+}
+@media (max-width:560px){
+	.skill-left{gap:10px}
+	.skill-label{font-size:15px}
+	.skill-percent{font-size:13px}
+	.tools{gap:8px}
+	.tool{font-size:12px;padding:7px 10px}
+}
+
+/* responsive ajuste */
+@media (max-width:900px){
+	.sobre-grid{grid-template-columns:1fr;gap:18px}
+	.hero h1{font-size:44px}
+	.hero .big{display:none}
+	.proyectos .cards-grid{grid-template-columns:1fr}
+	.platforms-grid{grid-template-columns:repeat(2,1fr)}
+	.header-inner{gap:8px;flex-wrap:wrap}
+	.bg-word{font-size:110px;top:6px}
+	.card.large{width:90%;max-width:380px}
+	.hero-title{font-size:36px}
+	.proyectos .section-title{ font-size:36px }
+}
+
+@media (max-width:700px){
+	.philosophy-cards{grid-template-columns:1fr}
+	.philosophy-text p{font-size:14px}
+	.card-head{gap:10px}
+	.card-icon{width:40px;height:40px;font-size:18px}
+}
+
+section#proyectos .projects-cta{
+    text-align: center;
+    margin-top: 24px;
+    color: #000;
+}
+
+/* Modal Contacto */
+.modal-overlay{
+	position:fixed;
+	inset:0;
+	background:rgba(10,10,12,0.5);
+	display:none;
+	align-items:center;
+	justify-content:center;
+	z-index:2000;
+	padding:28px;
+}
+.modal-overlay[aria-hidden="false"]{ display:flex; }
+
+.modal{
+	background:#fff;
+	width:960px;
+	max-width:96%;
+	border-radius:12px;
+	overflow:hidden;
+	box-shadow:0 30px 80px rgba(10,8,20,0.6);
+	position:relative;
+}
+.modal-close{
+	position:absolute;
+	right:12px;top:10px;
+	background:transparent;border:0;font-size:20px;cursor:pointer;padding:8px;
+}
+.modal-inner{display:flex;min-height:420px;}
+
+/* izquierda gradient */
+.modal-left{
+	flex:1;
+	color:#fff;
+	padding:28px;
+	background: linear-gradient(135deg,#ff6ea1 0%, #d293ff 50%, #7a5cff 100%);
+	display:flex;
+	flex-direction:column;
+	gap:18px;
+	justify-content:center;
+}
+.modal-left h3{margin:0;font-size:28px;letter-spacing:1px}
+.modal-lead{opacity:0.95}
+.contact-info{margin-top:6px}
+.contact-info .ci-row{display:flex;flex-direction:column;margin:10px 0}
+.modal-follow p{margin:12px 0 6px}
+.follow-buttons{display:flex;gap:8px;flex-wrap:wrap}
+.pill{background:rgba(255,255,255,0.12);color:#fff;padding:8px 12px;border-radius:999px;text-decoration:none;font-weight:700}
+
+/* derecha formulario */
+.modal-right{
+	flex:1;
+	background:#fff;
+	padding:28px;
+	color:#222;
+}
+.modal-right label{display:block;font-size:13px;color:#444;margin-bottom:10px}
+.modal-right input,
+.modal-right textarea{
+	width:100%;
+	padding:12px 14px;
+	border:1px solid #eee;border-radius:8px;
+	font-size:14px;
+	margin-top:6px;
+	box-shadow:none;
+}
+.row{display:flex;gap:12px}
+.row label{flex:1}
+.form-actions{display:flex;align-items:center;gap:16px;margin-top:14px}
+.btn-send{
+	background:linear-gradient(90deg,var(--accent1),#ffb24d);
+	color:#fff;border:0;padding:12px 18px;border-radius:10px;font-weight:800;cursor:pointer;
+	box-shadow:0 8px 30px rgba(122,92,255,0.08);
+}
+.form-note{font-size:13px;color:var(--muted)}
+.form-status{margin-top:12px;color:var(--accent1);font-weight:700}
+
+/* responsive */
+@media (max-width:920px){
+	.modal-inner{flex-direction:column}
+	.modal-left{padding:20px;order:0}
+	.modal-right{padding:20px;order:1}
+	.row{flex-direction:column}
+}
+
+/* ...existing code... */
+
+.brand { /* conservar degradado del logo completo que ya existe */ }
+
+/* estilo específico para la F interactiva */
+#brandF{
+	cursor:pointer;
+	user-select:none;
+	display:inline-block;
+	padding-right:4px;
+	/* hereda el degradado del .brand; añadir sutil efecto al pasar/focar */
+	transition: transform 140ms ease, filter 140ms ease;
+}
+#brandF:hover,
+#brandF:focus{
+	transform: translateY(-2px) scale(1.02);
+	filter: drop-shadow(0 8px 20px rgba(122,92,255,0.08));
+	outline: none;
+}
+/* focus visible para accesibilidad */
+#brandF:focus-visible{
+	box-shadow: 0 0 0 4px rgba(122,92,255,0.12);
+	border-radius:4px;
+}

@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
+
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+}
+
+/* Contenedor principal para centrar el contenido */
+.halloween-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+h1.halloween-title {
+    font-family: 'Creepster', cursive;
+    font-size: 10vw;
+    color: #ff7e00;
+    text-shadow: 
+        0 0 5px #ff7e00,
+        0 0 10px #ff7e00,
+        0 0 20px #ff4800,
+        0 0 30px #ff4800,
+        0 0 40px #ff4800;
+    animation: flicker 1.5s infinite alternate;
+}
+
+/* Animación de parpadeo para el título */
+@keyframes flicker {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
+        text-shadow:
+            0 0 4px #ff7e00,
+            0 0 11px #ff7e00,
+            0 0 19px #ff4800,
+            0 0 40px #ff4800,
+            0 0 80px #ff4800;
+    }
+    20%, 24%, 55% {        
+        text-shadow: none;
+    }
+}
+
+/* Canvas para las partículas */
+#particle-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/* Telas de araña en las esquinas */
+body::before, body::after {
+    content: '';
+    position: absolute;
+    width: 20vw;
+    height: 20vw;
+    min-width: 150px;
+    min-height: 150px;
+    max-width: 300px;
+    max-height: 300px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M 0 0 L 100 0 L 100 100' fill='none' stroke='rgba(255,255,255,0.2)' stroke-width='1'/%3E%3Cpath d='M 50 0 L 100 50' fill='none' stroke='rgba(255,255,255,0.2)' stroke-width='1'/%3E%3Cpath d='M 25 0 L 100 75' fill='none' stroke='rgba(255,255,255,0.2)' stroke-width='1'/%3E%3Cpath d='M 0 25 L 75 100' fill='none' stroke='rgba(255,255,255,0.2)' stroke-width='1'/%3E%3Cpath d='M 0 50 L 50 100' fill='none' stroke='rgba(255,255,255,0.2)' stroke-width='1'/%3E%3Cpath d='M 0 75 L 25 100' fill='none' stroke='rgba(255,255,255,0.2)' stroke-width='1'/%3E%3Cpath d='M 10 10 C 30 10, 30 30, 50 30 S 70 10, 90 10' fill='none' stroke='rgba(255,255,255,0.2)' stroke-width='1'/%3E%3Cpath d='M 20 20 C 40 20, 40 40, 60 40 S 80 20, 80 20' fill='none' stroke='rgba(255,255,255,0.2)' stroke-width='1'/%3E%3Cpath d='M 30 30 C 50 30, 50 50, 70 50' fill='none' stroke='rgba(255,255,255,0.2)' stroke-width='1'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 3;
+}
+
+body::before {
+    top: 0;
+    left: 0;
+}
+
+body::after {
+    top: 0;
+    right: 0;
+    transform: scaleX(-1);
+}
+
+/* Fantasma animado */
+.ghost {
+    position: absolute;
+    bottom: 10%;
+    left: 10%;
+    width: 100px;
+    height: 130px;
+    background: #fff;
+    border-radius: 50px 50px 0 0;
+    z-index: 4;
+    animation: float 8s ease-in-out infinite;
+}
+
+.ghost::before, .ghost::after {
+    content: '';
+    position: absolute;
+    background: #000;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    top: 40px;
+}
+
+.ghost::before {
+    left: 25px;
+}
+
+.ghost::after {
+    right: 25px;
+}
+
+.ghost .mouth {
+    position: absolute;
+    width: 20px;
+    height: 10px;
+    background: #000;
+    border-radius: 0 0 10px 10px;
+    top: 65px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.ghost .tail {
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    background: #fff;
+    overflow: hidden;
+}
+
+.ghost .tail::before {
+    content: '';
+    position: absolute;
+    width: 33.33%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 0, transparent 10px, #fff 10px);
+    left: 0;
+}
+.ghost .tail::after {
+    content: '';
+    position: absolute;
+    width: 33.33%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 0, transparent 10px, #fff 10px);
+    left: 33.33%;
+}
+.ghost .tail span {
+    position: absolute;
+    width: 33.33%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 0, transparent 10px, #fff 10px);
+    left: 66.66%;
+}
+
+
+@keyframes float {
+    0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 0.8;
+    }
+    50% {
+        transform: translateY(-40px) translateX(20vw) rotate(10deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 0.8;
+    }
+}

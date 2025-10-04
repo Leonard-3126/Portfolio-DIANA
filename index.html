@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>Portfolio - Diana</title>
+	<link rel="icon" type="image/png" href="logos/dianaLG.png" />
+	<link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+	<header class="site-header">
+		<div class="container header-inner">
+			<div class="brand">
+				   <!-- PORTFOLIO con la F interactiva en el medio -->
+				   <span class="brand-letter">P</span><span class="brand-letter">O</span><span class="brand-letter">R</span><span class="brand-letter">T</span><span class="brand-letter">F</span><span class="brand-letter">O</span><span class="brand-letter">L</span><span class="brand-letter">I</span><span id="brandF" class="brand-letter" role="button" tabindex="0" aria-label="Acceso administrador" title="Acceso administrador">O</span>
+				   <div class="lang-switcher" style="display:inline-block;vertical-align:middle;margin-left:18px;">
+					   <div class="lang-dropdown" id="langDropdown">
+						   <button class="lang-dropdown-btn" id="langDropdownBtn" aria-label="Seleccionar idioma">
+							   <img id="currentLangFlag" src="logos/SPAÑA.png" alt="Español" class="lang-flag-img-main">
+							   <span class="lang-dropdown-arrow">▼</span>
+						   </button>
+						   <div class="lang-dropdown-list" id="langDropdownList">
+							   <button class="lang-flag" data-lang="es" aria-label="Español"><img src="logos/SPAÑA.png" alt="Español" class="lang-flag-img">Español</button>
+							   <button class="lang-flag" data-lang="it" aria-label="Italiano"><img src="logos/ITALIA.png" alt="Italiano" class="lang-flag-img">Italiano</button>
+							   <button class="lang-flag" data-lang="en" aria-label="English"><img src="logos/EEUU.png" alt="English" class="lang-flag-img">English</button>
+						   </div>
+					   </div>
+				   </div>
+			</div>
+			<nav class="nav">
+				<a href="#sobre-mi">Sobre mí</a>
+				<a href="#proyectos">Proyectos</a>
+				<a href="#plataformas">Plataformas</a>
+			</nav>
+			<!-- reemplazado: usar button para evitar comportamiento de enlace -->
+			<button id="contactBtn" class="btn contact" type="button" data-modal="contactModal">Contacto</button>
+			<!-- Botón editar header solo para admin -->
+			<button id="editHeaderBtn" class="btn edit-admin">✏️ Editar header</button>
+		</div>
+	</header>
+
+	<section class="hero">
+		<div class="container hero-inner">
+			<h1 class="bg-word" aria-hidden id="heroTitle"><span id="heroTitleText">DISEÑADORA</span><button class="edit-admin" id="editHeroTitleBtn">✏️</button></h1>
+			<h2 class="hero-title" id="heroSubtitle">CREATIVO <button class="edit-admin" id="editHeroSubtitleBtn">✏️</button></h2>
+			
+			<div class="hero-cards">
+				   <div class="card large">
+					   <div class="icon">🚀</div>
+					<h3 id="card1Title">INNOVACIÓN <button class="edit-admin" id="editCard1TitleBtn">✏️</button></h3>
+					<p id="card1Text">Soluciones creativas que marcan la diferencia <button class="edit-admin" id="editCard1TextBtn">✏️</button></p>
+					<div class="edit-admin card-edit-panel" id="card1EditPanel">
+						   <label>Imagen:<input type="file" id="card1ImgInput" accept="image/*"></label>
+						   <label>Link:<input type="url" id="card1LinkInput" placeholder="https://..." style="width:180px"></label>
+						   <img id="card1ImgPreview" style="max-width:120px;max-height:80px;display:none;margin-top:8px;border-radius:8px;" />
+					   </div>
+				   </div>
+
+				   <div class="card large">
+					   <div class="icon">💡</div>
+					<h3 id="card2Title">CREATIVIDAD <button class="edit-admin" id="editCard2TitleBtn">✏️</button></h3>
+					<p id="card2Text">Diseños únicos con identidad propia <button class="edit-admin" id="editCard2TextBtn">✏️</button></p>
+					<div class="edit-admin card-edit-panel" id="card2EditPanel">
+						   <label>Imagen:<input type="file" id="card2ImgInput" accept="image/*"></label>
+						   <label>Link:<input type="url" id="card2LinkInput" placeholder="https://..." style="width:180px"></label>
+						   <img id="card2ImgPreview" style="max-width:120px;max-height:80px;display:none;margin-top:8px;border-radius:8px;" />
+					   </div>
+				   </div>
+
+				   <div class="card large">
+					   <div class="icon">⚡</div>
+					<h3 id="card3Title">IMPACTO <button class="edit-admin" id="editCard3TitleBtn">✏️</button></h3>
+					<p id="card3Text">Resultados que trascienden expectativas <button class="edit-admin" id="editCard3TextBtn">✏️</button></p>
+					<div class="edit-admin card-edit-panel" id="card3EditPanel">
+						   <label>Imagen:<input type="file" id="card3ImgInput" accept="image/*"></label>
+						   <label>Link:<input type="url" id="card3LinkInput" placeholder="https://..." style="width:180px"></label>
+						   <img id="card3ImgPreview" style="max-width:120px;max-height:80px;display:none;margin-top:8px;border-radius:8px;" />
+					   </div>
+				   </div>
+			</div>	
+
+			<p class="lead" id="heroLead">Transformo ideas en experiencias visuales extraordinarias que conectan, inspiran y generan resultados. <button class="edit-admin" id="editHeroLeadBtn">✏️</button></p>
+		</div>
+	</section>
+
+	
+
+		<section id="sobre-mi" class="sobre container">
+			<!-- Eliminado duplicado, solo queda la versión editable -->
+			<h2 class="section-title" id="aboutTitle">SOBRE MÍ <button class="edit-admin" id="editAboutTitleBtn">✏️</button></h2>
+			<p class="section-desc" id="aboutDesc">Conoce la historia detrás del diseñador, mi proceso creativo y lo que me motiva a crear cada día. <button class="edit-admin" id="editAboutDescBtn">✏️</button></p>
+
+			<div class="sobre-grid">
+				<div class="tabs">
+					<div class="tabs-header">
+						<button class="tab-btn active" data-tab="historia"><span id="tabHistoriaText"</span>Mi Historia</span></button>
+						<button class="tab-btn" data-tab="habilidades"><span id="tabHabilidadesText">Habilidades</span></button>
+						<button class="tab-btn" data-tab="filosofia"><span id="tabFilosofiaText">Filosofía</span></button>
+					</div>
+					<div class="tabs-content">
+						<article id="historia" class="tab active">
+							<p id="aboutStory1">Mi viaje en el diseño comenzó hace más de 6 años, cuando descubrí que podía combinar mi pasión por el arte con la tecnología para crear experiencias que realmente importen. <button class="edit-admin" id="editAboutStory1Btn">✏️</button></p>
+							<p id="aboutStory2">He tenido la oportunidad de trabajar con startups innovadoras, empresas establecidas y proyectos personales que me han desafiado a crecer constantemente como profesional. <button class="edit-admin" id="editAboutStory2Btn">✏️</button></p>
+							<p id="aboutStory3">Lo que más me motiva es ver cómo un buen diseño puede transformar la percepción de una marca y generar conexiones emocionales duraderas con las personas. <button class="edit-admin" id="editAboutStory3Btn">✏️</button></p>
+
+							<div class="stats-grid">
+								<div class="stat">
+									<div class="stat-top">
+										<div class="icon" id="statIcon1">🏆 <button class="edit-admin" id="editStatIcon1Btn">✏️</button></div>
+										<div class="value" id="statValue1"><strong>12+</strong> <button class="edit-admin" id="editStatValue1Btn">✏️</button></div>
+									</div>
+									<div class="label" id="statLabel1">Design Awards <button class="edit-admin" id="editStatLabel1Btn">✏️</button></div>
+								</div>
+
+								<div class="stat">
+									<div class="stat-top">
+										<div class="icon" id="statIcon2">🚀 <button class="edit-admin" id="editStatIcon2Btn">✏️</button></div>
+										<div class="value" id="statValue2"><strong>150+</strong> <button class="edit-admin" id="editStatValue2Btn">✏️</button></div>
+									</div>
+									<div class="label" id="statLabel2">Proyectos Lanzados <button class="edit-admin" id="editStatLabel2Btn">✏️</button></div>
+
+								</div>
+
+								<div class="stat">
+									<div class="stat-top">
+										<div class="icon" id="statIcon3">🌟 <button class="edit-admin" id="editStatIcon3Btn">✏️</button></div>
+										<div class="value" id="statValue3"><strong>6+</strong> <button class="edit-admin" id="editStatValue3Btn">✏️</button></div>
+									</div>
+									<div class="label" id="statLabel3">Años Experiencia <button class="edit-admin" id="editStatLabel3Btn">✏️</button></div>
+
+								</div>
+
+								<div class="stat">
+									<div class="stat-top">
+										<div class="icon" id="statIcon4">😊 <button class="edit-admin" id="editStatIcon4Btn">✏️</button></div>
+										<div class="value" id="statValue4"><strong>98%</strong> <button class="edit-admin" id="editStatValue4Btn">✏️</button></div>
+									</div>
+									<div class="label" id="statLabel4">Clientes Felices <button class="edit-admin" id="editStatLabel4Btn">✏️</button></div>
+								</div>
+							</div>
+						</article>
+
+						<article id="habilidades" class="tab">
+							<p id="skillsIntro" class="editable-admin">Mi stack abarca desde el diseño tradicional hasta las últimas tendencias en experiencia digital. <button class="edit-admin" id="editSkillsIntroBtn">✏️</button></p>
+
+							<div class="skills-list">
+								<div class="skill-row">
+									<div class="skill-left">
+										<div class="skill-label editable-admin" id="skillLabel1">🎨 UI/UX Design <button class="edit-admin" id="editSkillLabel1Btn">✏️</button></div>
+										<div class="skill-percent editable-admin" id="skillPercent1">95% <button class="edit-admin" id="editSkillPercent1Btn">✏️</button></div>
+									</div>
+									<div class="skill-bar">
+										<div class="skill-fill" style="width:95%"></div>
+									</div>
+								</div>
+
+								<div class="skill-row">
+									<div class="skill-left">
+										<div class="skill-label editable-admin" id="skillLabel2">💡 Branding <button class="edit-admin" id="editSkillLabel2Btn">✏️</button></div>
+										<div class="skill-percent editable-admin" id="skillPercent2">90% <button class="edit-admin" id="editSkillPercent2Btn">✏️</button></div>
+									</div>
+									<div class="skill-bar">
+										<div class="skill-fill" style="width:90%"></div>
+									</div>
+								</div>
+
+								<div class="skill-row">
+									<div class="skill-left">
+										<div class="skill-label editable-admin" id="skillLabel3">🎞️ Motion Graphics <button class="edit-admin" id="editSkillLabel3Btn">✏️</button></div>
+										<div class="skill-percent editable-admin" id="skillPercent3">85% <button class="edit-admin" id="editSkillPercent3Btn">✏️</button></div>
+									</div>
+									<div class="skill-bar">
+										<div class="skill-fill" style="width:85%"></div>
+									</div>
+								</div>
+
+								<div class="skill-row">
+									<div class="skill-left">
+										<div class="skill-label editable-admin" id="skillLabel4">⚙️ Frontend Dev <button class="edit-admin" id="editSkillLabel4Btn">✏️</button></div>
+										<div class="skill-percent editable-admin" id="skillPercent4">80% <button class="edit-admin" id="editSkillPercent4Btn">✏️</button></div>
+									</div>
+									<div class="skill-bar">
+										<div class="skill-fill" style="width:80%"></div>
+									</div>
+								</div>
+							</div>
+
+							<div class="tools-box">
+								<h4 class="editable-admin" id="skillsToolsTitle">Herramientas Favoritas <button class="edit-admin" id="editSkillsToolsTitleBtn">✏️</button></h4>
+								<div class="tools">
+									<span class="tool editable-admin" id="tool1">Figma <button class="edit-admin" id="editTool1Btn">✏️</button></span>
+									<span class="tool editable-admin" id="tool2">Adobe XD <button class="edit-admin" id="editTool2Btn">✏️</button></span>
+									<span class="tool editable-admin" id="tool3">Photoshop <button class="edit-admin" id="editTool3Btn">✏️</button></span>
+									<span class="tool editable-admin" id="tool4">Illustrator <button class="edit-admin" id="editTool4Btn">✏️</button></span>
+									<span class="tool editable-admin" id="tool5">After Effects <button class="edit-admin" id="editTool5Btn">✏️</button></span>
+									<span class="tool editable-admin" id="tool6">Cinema 4D <button class="edit-admin" id="editTool6Btn">✏️</button></span>
+									<span class="tool editable-admin" id="tool7">Blender <button class="edit-admin" id="editTool7Btn">✏️</button></span>
+									<span class="tool editable-admin" id="tool8">React <button class="edit-admin" id="editTool8Btn">✏️</button></span>
+									<span class="tool editable-admin" id="tool9">Framer Motion <button class="edit-admin" id="editTool9Btn">✏️</button></span>
+									<span class="tool editable-admin" id="tool10">Webflow <button class="edit-admin" id="editTool10Btn">✏️</button></span>
+								</div>
+							</div>
+						</article>
+
+			<article id="filosofia" class="tab">
+				<div class="philosophy">
+					<div class="philosophy-text">
+						<p class="editable-admin" id="philosophy1"><strong>Menos es más.</strong> Creo firmemente en el poder de la simplicidad y la claridad para comunicar mensajes complejos de manera efectiva. <button class="edit-admin" id="editPhilosophy1Btn">✏️</button></p>
+						<p class="editable-admin" id="philosophy2"><strong>El usuario primero.</strong> Cada decisión de diseño debe estar respaldada por una comprensión profunda de las necesidades y comportamientos del usuario final. <button class="edit-admin" id="editPhilosophy2Btn">✏️</button></p>
+						<p class="editable-admin" id="philosophy3"><strong>Innovación constante.</strong> El diseño evoluciona constantemente, y es nuestra responsabilidad mantenernos actualizados y experimentar con nuevas técnicas y tecnologías. <button class="edit-admin" id="editPhilosophy3Btn">✏️</button></p>
+					</div>
+				<div class="philosophy-cards">
+					<article class="philosophy-card card-pink">
+						<div class="card-head">
+							<div class="card-icon">🏅</div>
+								<h4 class="card-title editable-admin" id="philosophyCardTitle1">Calidad Premium <button class="edit-admin" id="editPhilosophyCardTitle1Btn">✏️</button></h4>
+							</div>
+								<p class="card-desc editable-admin" id="philosophyCardDesc1">Cada proyecto es tratado con el máximo nivel de profesionalismo y atención al detalle. <button class="edit-admin" id="editPhilosophyCardDesc1Btn">✏️</button></p>
+					</article>
+
+					<article class="philosophy-card card-yellow">
+						<div class="card-head">
+							<div class="card-icon">💡</div>
+								<h4 class="card-title editable-admin" id="philosophyCardTitle2">Soluciones Creativas <button class="edit-admin" id="editPhilosophyCardTitle2Btn">✏️</button></h4>
+						</div>
+							<p class="card-desc editable-admin" id="philosophyCardDesc2">Busco constantemente maneras innovadoras de resolver problemas de diseño complejos. <button class="edit-admin" id="editPhilosophyCardDesc2Btn">✏️</button></p>
+					</article>
+					</div>
+				</div>
+			</article>
+					</div>
+				</div>
+
+				</aside class="profile-card">
+				   <div class="avatar-gradient" id="profileAvatarBox" style="position:relative;overflow:hidden;">
+					   <img id="profileAvatarImg" src="" alt="Avatar" style="display:none;width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;z-index:2;border-radius:20px;" />
+					   <!-- SVG avatar aumentado para encajar en el contenedor más grande -->
+					   <svg id="profileAvatarSVG" width="180" height="180" viewBox="0 0 120 120" aria-hidden style="z-index:1;position:relative;">
+						   <circle cx="60" cy="40" r="24" fill="#ffd1e6"/>
+						   <rect x="20" y="70" rx="18" ry="18" width="80" height="36" fill="#ffd1e6"/>
+					   </svg>
+					<div class="edit-admin" id="profileAvatarEditPanel" style="position:absolute;bottom:8px;right:8px;z-index:3;">
+						   <label style="background:#fff3f6;padding:4px 10px;border-radius:8px;cursor:pointer;font-size:13px;">
+							   Cambiar imagen <input type="file" id="profileAvatarInput" accept="image/*" style="display:none;">
+						   </label>
+					   </div>
+				   </div>
+
+				</aside>
+                                    
+			</div>
+		</section>
+
+	<main>
+		<section id="proyectos" class="proyectos container">
+			<h2 class="section-title" id="projectsTitle">PROYECTOS DESTACADOS <button class="edit-admin" id="editProjectsTitleBtn">✏️</button></h2>
+			<p class="section-desc" id="projectsDesc">Una selección cuidada de trabajos que reflejan pasión por el diseño. <button class="edit-admin" id="editProjectsDescBtn">✏️</button></p>
+
+			<div class="cards-grid">
+				
+				<article class="project">
+					<div class="thumb" id="project1Thumb" style="background:linear-gradient(135deg,#ff6ea1,#7a5cff)"></div>
+					<div class="project-body">
+						<span class="tag" id="project1Tag">UI/UX Design <button class="edit-admin" id="editProject1TagBtn">✏️</button></span>
+						<h4 id="project1Title">Interface Futurista <button class="edit-admin" id="editProject1TitleBtn">✏️</button></h4>
+						<p class="muted" id="project1Desc">Proyecto de interfaz avanzada <button class="edit-admin" id="editProject1DescBtn">✏️</button></p>
+						<div class="edit-admin project-edit-panel" id="project1EditPanel">
+							<div class="image-upload-wrapper">
+								<label>Imagen:<input type="file" id="project1ImgInput" accept="image/*"></label>
+							</div>
+							<label>Link:<input type="url" id="project1LinkInput" placeholder="https://..." style="width:180px"></label>
+							<img id="project1ImgPreview" style="max-width:120px;max-height:80px;display:none;margin-top:8px;border-radius:8px;" />
+						</div>
+				
+				</article>
+				<article class="project">
+					<div class="thumb" id="project2Thumb" style="background:linear-gradient(135deg,#ffcb6b,#ff6b9f)"></div>
+					<div class="project-body">
+						<span class="tag" id="project2Tag">Branding <button class="edit-admin" id="editProject2TagBtn">✏️</button></span>
+						<h4 id="project2Title">Identidad Visual <button class="edit-admin" id="editProject2TitleBtn">✏️</button></h4>
+						<p class="muted" id="project2Desc">Diseño de marca <button class="edit-admin" id="editProject2DescBtn">✏️</button></p>
+						<div class="edit-admin project-edit-panel" id="project2EditPanel">
+							<div class="image-upload-wrapper">
+								<label>Imagen:<input type="file" id="project2ImgInput" accept="image/*"></label>
+							</div>
+							<label>Link:<input type="url" id="project2LinkInput" placeholder="https://..." style="width:180px"></label>
+							<img id="project2ImgPreview" style="max-width:120px;max-height:80px;display:none;margin-top:8px;border-radius:8px;" />
+						</div>
+					</div>
+				</article>
+
+				<article class="project">
+					<div class="thumb" id="project3Thumb" style="background:linear-gradient(135deg,#5be7ff,#8a6bff)"></div>
+					<div class="project-body">
+						<span class="tag" id="project3Tag">Product Design <button class="edit-admin" id="editProject3TagBtn">✏️</button></span>
+						<h4 id="project3Title">Packaging Experimental <button class="edit-admin" id="editProject3TitleBtn">✏️</button></h4>
+						<p class="muted" id="project3Desc">Diseño de empaque innovador <button class="edit-admin" id="editProject3DescBtn">✏️</button></p>
+						<div class="edit-admin project-edit-panel" id="project3EditPanel">
+							<div class="image-upload-wrapper">
+								<label>Imagen:<input type="file" id="project3ImgInput" accept="image/*"></label>
+							</div>
+							<label>Link:<input type="url" id="project3LinkInput" placeholder="https://..." style="width:180px"></label>
+							<img id="project3ImgPreview" style="max-width:120px;max-height:80px;display:none;margin-top:8px;border-radius:8px;" />
+						</div>
+					</div>
+				</article>
+			</div>
+		</section>
+
+		<section id="plataformas" class="plataformas container">
+	<h2 class="section-title">ENCUÉNTRAME EN</h2>
+	<p class="section-desc">Explora mi trabajo, proceso creativo y conecta conmigo a través de diferentes plataformas digitales.</p>
+
+	<!-- cards grid -->
+	<div class="platforms-grid">
+				<!-- Behance -->
+				<article class="platform-card behance">
+						<div class="platform-head">
+								<a class="platform-icon" href="https://www.behance.net/dianajolivero1?tracking_source=userSearchProfilePanel&isProfilePanel=true" target="_blank" rel="noopener">
+									<img src="logos/behance.png" alt="Behance" style="width:60px;height:60px;object-fit:contain;">
+								</a>
+								<div>
+					<div class="platform-title editable-admin" id="platformBehanceTitle">Behance <button class="edit-admin" id="editPlatformBehanceTitleBtn">✏️</button></div>
+					<div class="platform-sub editable-admin" id="platformBehanceSub">Portfolio visual completo <button class="edit-admin" id="editPlatformBehanceSubBtn" style="display:none;">✏️</button></div>
+				</div>
+			</div>
+		</article>
+
+				<!-- Instagram -->
+				<article class="platform-card instagram">
+						<div class="platform-head">
+								<a class="platform-icon" href="https://www.instagram.com/diana__jhazmin/" target="_blank" rel="noopener">
+									<img src="logos/instagram1.png" alt="Instagram" style="width:70px;height:70px;object-fit:contain;">
+								</a>
+								<div>
+					<div class="platform-title editable-admin" id="platformInstagramTitle">Instagram <button class="edit-admin" id="editPlatformInstagramTitleBtn" style="display:none;">✏️</button></div>
+					<div class="platform-sub editable-admin" id="platformInstagramSub">Proceso creativo y behind the scenes <button class="edit-admin" id="editPlatformInstagramSubBtn" style="display:none;">✏️</button></div>
+				</div>
+			</div>
+		</article>
+
+				<!-- LinkedIn -->
+				<article class="platform-card linkedin">
+						<div class="platform-head">
+								<a class="platform-icon" href="https://www.linkedin.com/in/diana-oliveros-6401172a3?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" rel="noopener">
+									<img src="logos/linkedin.png" alt="LinkedIn" style="width:40px;height:40px;object-fit:contain;">
+								</a>
+								<div>
+					<div class="platform-title editable-admin" id="platformLinkedinTitle">LinkedIn <button class="edit-admin" id="editPlatformLinkedinTitleBtn" style="display:none;">✏️</button></div>
+					<div class="platform-sub editable-admin" id="platformLinkedinSub">Red profesional y colaboraciones <button class="edit-admin" id="editPlatformLinkedinSubBtn" style="display:none;">✏️</button></div>
+				</div>
+			</div>
+		</article>	
+	</div>
+	<!-- summary metrics -->
+	
+</section>
+
+<section class="logo-admin">
+	<div class="logo-admin-inner">
+		<img src="logos/diana.png" alt="Logo Diana" class="logo-admin-img">
+		<p class="logo-admin-copyright">© Diana Oliveros 2025</p>
+	</div>
+</section>
+<style>
+.logo-admin {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background: #fafafa;
+	padding: 32px 0 18px 0;
+	margin-top: 32px;
+}
+.logo-admin-inner {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.logo-admin-img {
+	width: 120px;
+	height: 120px;
+	object-fit: contain;
+	margin-bottom: 18px;
+	display: block;
+}
+.logo-admin-copyright {
+	font-family: 'Times New Roman', Times, serif;
+	font-size: 2rem;
+	color: #222;
+	letter-spacing: 1px;
+	margin: 0;
+	text-align: center;
+}
+@media (max-width: 600px) {
+	.logo-admin-img { width: 80px; height: 80px; }
+	.logo-admin-copyright { font-size: 1.2rem; }
+	.logo-admin { padding: 18px 0 10px 0; }
+}
+</style>
+
+
+	<footer id="contacto" class="site-footer">
+		<div class="container">
+			<b></b>
+		</div>
+	</footer>
+
+	<!-- POPUP CONTACTO -->
+	<div id="contactModal" class="modal-overlay" aria-hidden="true" role="dialog" aria-labelledby="contact-title">
+		<div class="modal" role="document">
+			<button class="modal-close" aria-label="Cerrar">×</button>
+			<div class="modal-inner">
+				<!-- izquierda: info y gradient -->
+				<div class="modal-left">
+					<h3 id="contact-title">¡HABLEMOS!</h3>
+					<p class="modal-lead">Convirtamos tu idea en realidad</p>
+
+					<div class="contact-info">
+						<div class="ci-row"><strong>Email</strong><span>Dianaoliveroshuanca@gmail.com</span></div>
+						<div class="ci-row"><strong>Teléfono</strong><span>+39 380 893 5662</span></div>
+						<div class="ci-row"><strong>Ubicación</strong><span>MILAN, ITALIA</span></div>
+					</div>
+
+					<div class="modal-follow">
+						<p>Sígueme en</p>
+						<div class="follow-buttons">
+							<a href="https://www.instagram.com/diana__jhazmin/" class="pill">Instagram</a>
+							<a href="https://www.linkedin.com/in/diana-oliveros-6401172a3?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" class="pill">LinkedIn</a>
+							<a href="https://www.behance.net/dianajolivero1?tracking_source=userSearchProfilePanel&isProfilePanel=true" class="pill">Behance</a>
+						</div>
+					</div>
+				</div>
+
+				<!-- derecha: formulario -->
+				<div class="modal-right">
+					<form id="contactForm" action="https://formsubmit.co/Dianaoliveroshuanca@gmail.com" method="POST" target="_blank">
+
+						<div class="row">
+							<label>Nombre
+								<input name="name" type="text" placeholder="Tu nombre" required>
+							</label>
+							<label>Teléfono
+								<input name="phone" type="tel" placeholder="número">
+							</label>
+							
+						</div>
+						<label>Email
+							<input name="email" type="email" placeholder="tu@email.com" required>
+						</label>
+
+						<label>Mensaje
+							<textarea name="message" rows="6" placeholder="Cuéntame sobre tu proyecto, ideas, presupuesto, timeline..." required></textarea>
+						</label>
+
+						<!-- Opcional: evitar captcha y redirección -->
+						<input type="hidden" name="_captcha" value="false">
+						<input type="hidden" name="_next" value="https://tuportafolio.com/gracias.html">
+
+						<div class="form-actions">
+							<button type="submit" class="btn-send">
+								<span class="icon">✈️</span> ENVIAR MENSAJE
+							</button>
+							<span class="form-note muted">Respondo en menos de 24 horas ⚡</span>
+						</div>
+						<div id="formSentMsg" style="display:none;color:#27ae60;font-weight:600;margin-top:12px;text-align:center;">¡Mensaje enviado correctamente!</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- ADMIN LOGIN POPUP -->
+<div id="adminModal" class="modal-overlay" aria-hidden="true" role="dialog" aria-labelledby="admin-title">
+         <div class="modal modal-admin" role="document">
+         <div class="modal-inner modal-admin-inner">
+	<div class="modal modal-admin" role="document">
+		<button class="modal-close" aria-label="Cerrar admin">×</button>
+		<div class="modal-inner modal-admin-inner">
+			<h3 id="admin-title" class="admin-title">Acceso administrador</h3>
+			<p class="admin-desc">Introduce credenciales para acceder al panel de administración (local)</p>
+			<form id="adminForm">
+				<div class="admin-field">
+					<label for="adminUser">Usuario</label>
+					<input type="text" id="adminUser" name="user">
+				</div>
+				<div class="admin-field">
+					<label for="adminPass">Contraseña</label>
+					<input type="password" id="adminPass" name="pass">
+				</div>
+				<div class="admin-actions">
+					<button type="submit" class="btn btn-admin">Entrar</button>
+					<button type="button" id="adminCancel" class="btn btn-cancel">Cancelar</button>
+					<span id="adminStatus" class="admin-status"></span>
+				</div>
+			</form>
+		</div>
+	</div>
+         </div>
+         </div>
+</div>
+
+	<!-- cargar Firebase client y luego la lógica de la app -->
+	<script type="module" src="assets/firebase-read.js"></script>
+<script>
+// Mostrar notificación de mensaje enviado al enviar el formulario
+document.addEventListener('DOMContentLoaded', function() {
+	var form = document.getElementById('contactForm');
+	if(form) {
+		form.addEventListener('submit', function(e) {
+			setTimeout(function() {
+				var msg = document.getElementById('formSentMsg');
+				if(msg) {
+					msg.style.display = 'block';
+					setTimeout(function(){ msg.style.display = 'none'; }, 4000);
+				}
+			}, 500); // pequeño delay para no interferir con el submit real
+		});
+	}
+});
+</script>
+	<script src="assets/app.js"></script>
+<script>
+// Traducción básica en 3 idiomas
+const translations = {
+	es: {
+		nav: ["Sobre mí", "Proyectos", "Plataformas"],
+		contact: "Contacto",
+		heroTitle: "DISEÑADORA",
+		heroSubtitle: "CREATIVO",
+		card1Title: "INNOVACIÓN",
+		card1Text: "Soluciones creativas que marcan la diferencia",
+		card2Title: "CREATIVIDAD",
+		card2Text: "Diseños únicos con identidad propia",
+		card3Title: "IMPACTO",
+		card3Text: "Resultados que trascienden expectativas",
+		heroLead: "Transformo ideas en experiencias visuales extraordinarias que conectan, inspiran y generan resultados.",
+		// ...agrega más claves según lo que quieras traducir
+	},
+	en: {
+		nav: ["About me", "Projects", "Platforms"],
+		contact: "Contact",
+		heroTitle: "DESIGNER",
+		heroSubtitle: "CREATIVE",
+		card1Title: "INNOVATION",
+		card1Text: "Creative solutions that make a difference",
+		card2Title: "CREATIVITY",
+		card2Text: "Unique designs with their own identity",
+		card3Title: "IMPACT",
+		card3Text: "Results that exceed expectations",
+		heroLead: "I transform ideas into extraordinary visual experiences that connect, inspire, and deliver results.",
+		// ...add more keys as needed
+	},
+	it: {
+		nav: ["Su di me", "Progetti", "Piattaforme"],
+		contact: "Contatto",
+		heroTitle: "DESIGNER",
+		heroSubtitle: "CREATIVO",
+		card1Title: "INNOVAZIONE",
+		card1Text: "Soluzioni creative che fanno la differenza",
+		card2Title: "CREATIVITÀ",
+		card2Text: "Design unici con identità propria",
+		card3Title: "IMPATTO",
+		card3Text: "Risultati che superano le aspettative",
+		heroLead: "Trasformo idee in esperienze visive straordinarie che connettono, ispirano e generano risultati.",
+		// ...aggiungi altre chiavi se necessario
+	}
+};
+
+function setLang(lang) {
+	const t = translations[lang] || translations['es'];
+	// Navegación
+	const navLinks = document.querySelectorAll('.nav a');
+	navLinks.forEach((a, i) => { if(t.nav[i]) a.textContent = t.nav[i]; });
+	// Botón contacto
+	const contactBtn = document.getElementById('contactBtn');
+	if(contactBtn) contactBtn.textContent = t.contact;
+	// Hero
+	const heroTitle = document.getElementById('heroTitleText');
+	if(heroTitle) heroTitle.textContent = t.heroTitle;
+	const heroSubtitle = document.getElementById('heroSubtitle');
+	if(heroSubtitle) heroSubtitle.childNodes[0].nodeValue = t.heroSubtitle + ' ';
+	// Cards
+	const card1Title = document.getElementById('card1Title');
+	if(card1Title) card1Title.childNodes[0].nodeValue = t.card1Title + ' ';
+	const card1Text = document.getElementById('card1Text');
+	if(card1Text) card1Text.childNodes[0].nodeValue = t.card1Text + ' ';
+	const card2Title = document.getElementById('card2Title');
+	if(card2Title) card2Title.childNodes[0].nodeValue = t.card2Title + ' ';
+	const card2Text = document.getElementById('card2Text');
+	if(card2Text) card2Text.childNodes[0].nodeValue = t.card2Text + ' ';
+	const card3Title = document.getElementById('card3Title');
+	if(card3Title) card3Title.childNodes[0].nodeValue = t.card3Title + ' ';
+	const card3Text = document.getElementById('card3Text');
+	if(card3Text) card3Text.childNodes[0].nodeValue = t.card3Text + ' ';
+	// Lead
+	const heroLead = document.getElementById('heroLead');
+	if(heroLead) heroLead.childNodes[0].nodeValue = t.heroLead + ' ';
+	// ...agrega aquí más campos a traducir según lo que necesites
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+	const langDropdown = document.getElementById('langDropdown');
+	const langDropdownBtn = document.getElementById('langDropdownBtn');
+	const langDropdownList = document.getElementById('langDropdownList');
+	const currentLangFlag = document.getElementById('currentLangFlag');
+	let currentLang = 'es';
+
+	function updateFlag(lang) {
+		let src = 'logos/SPAÑA.png';
+		let alt = 'Español';
+		if(lang === 'it') { src = 'logos/ITALIA.png'; alt = 'Italiano'; }
+		if(lang === 'en') { src = 'logos/EEUU.png'; alt = 'English'; }
+		currentLangFlag.src = src;
+		currentLangFlag.alt = alt;
+	}
+
+	langDropdownBtn.addEventListener('click', function(e) {
+		e.stopPropagation();
+		langDropdownList.style.display = langDropdownList.style.display === 'block' ? 'none' : 'block';
+	});
+	document.addEventListener('click', function() {
+		langDropdownList.style.display = 'none';
+	});
+	langDropdownList.querySelectorAll('.lang-flag').forEach(btn => {
+		btn.addEventListener('click', function(e) {
+			e.preventDefault();
+			const lang = this.dataset.lang;
+			setLang(lang);
+			updateFlag(lang);
+			currentLang = lang;
+			langDropdownList.style.display = 'none';
+		});
+	});
+	// Inicializar bandera
+	updateFlag(currentLang);
+});
+</script>
+</body>
+</html>

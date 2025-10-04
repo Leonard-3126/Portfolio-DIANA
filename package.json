@@ -1,0 +1,29 @@
+{
+  "name": "diana-portfolio-api",
+  "version": "1.0.0",
+  "description": "Servidor que sirve la web y proxy a Behance API",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.18.2",
+    "firebase": "^12.3.0",
+    "firebase-admin": "^11.10.0",
+    "nodemailer": "^7.0.7"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Leonard-3126/Portfolio-DIANA.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Leonard-3126/Portfolio-DIANA/issues"
+  },
+  "homepage": "https://github.com/Leonard-3126/Portfolio-DIANA#readme"
+}
