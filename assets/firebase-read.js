@@ -8,7 +8,10 @@ import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "http
  */
 
 const firebaseConfig = {
-  apiKey: "AIzaSyC4Sqg7BT49vap0ufK_OshQksA8AkVtL1U",
+    // IMPORTANTE: no dejes la API key aquí en el repositorio público.
+    // Reemplaza por tu propia clave en el entorno de build / hosting.
+    // Placeholder para evitar exposición accidental en el repo:
+    apiKey: "REPLACE_WITH_YOUR_API_KEY",
   authDomain: "portfolio-7ade3.firebaseapp.com",
   projectId: "portfolio-7ade3",
   storageBucket: "portfolio-7ade3.firebasestorage.app",

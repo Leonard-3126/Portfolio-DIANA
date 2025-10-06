@@ -39,3 +39,18 @@ Invoke-RestMethod -Uri http://localhost:3000/firebase/status
 ```
 
 Si necesitas que haga la configuración (actualizar workflow, crear README en el repo, etc.) puedo hacerlo por ti.
+
+## Rotar / revocar la API key expuesta
+
+Si recibiste una alerta (o viste la API key en el repo), haz lo siguiente inmediatamente:
+
+1. Ve a Google Cloud Console → APIs & Services → Credentials.
+2. Localiza la API key expuesta y elimínala (Delete). Esto la revocará.
+3. Crea una nueva API key (Create credentials → API key) y restringe su uso:
+   - Application restrictions: HTTP referrers (web sites) — añade la URL de tu dominio (ej: `https://tu-dominio.com/*`).
+   - API restrictions: selecciona las APIs que puede usar (por ejemplo: Firestore, Cloud Storage, etc.).
+4. Actualiza tu entorno de producción / hosting para usar la nueva API key (no la guardes en el repo).
+
+## Buenas prácticas adicionales
+- Para el frontend, las API keys de Firebase son públicas por diseño, pero restringirlas por referrer es esencial.
+- Para operaciones administrativas o server-side usa service accounts y secretos seguros (ya implementado en este repo).
