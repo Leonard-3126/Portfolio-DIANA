@@ -467,9 +467,10 @@ document.addEventListener('DOMContentLoaded', () => {
 				setTimeout(() => { close(); initAdminEditing(); }, 700);
 				return;
 			} else {
-				// si servidor indicó credenciales inválidas, mostrar mensaje y no seguir con silencioso fallback
-				if (result.status === 401 || (result.json && result.json.msg)) {
-					if (adminStatus) adminStatus.textContent = result.json && result.json.msg ? result.json.msg : 'Credenciales inválidas (server)';
+				// si servidor indicó credenciales inválidas explícitas, mostrar mensaje y no seguir con el fallback cliente.
+				// Pero no bloqueamos el fallback ante errores generales (por ejemplo, errores del Admin SDK o problemas de credenciales del runner).
+				if (result.status === 401 && result.json && result.json.msg && /credencial|invalid|inválid/i.test(result.json.msg)) {
+					if (adminStatus) adminStatus.textContent = result.json.msg;
 					setTimeout(() => { if (adminStatus) adminStatus.textContent = ''; }, 2000);
 					return;
 				}
