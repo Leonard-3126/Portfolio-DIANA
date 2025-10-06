@@ -9,11 +9,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Write service account JSON from secret
+      - name: Write service account JSON from secret (supports JSON or BASE64)
         env:
           SA_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+          SA_B64: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_BASE64 }}
         run: |
-          echo "$SA_JSON" > serviceAccountKey.json
+          if [ -n "$SA_JSON" ]; then
+            printf "%s" "$SA_JSON" > serviceAccountKey.json
+          elif [ -n "$SA_B64" ]; then
+            echo "$SA_B64" | base64 --decode > serviceAccountKey.json
+          else
+            echo "No service account secret provided" >&2
+            exit 1
+          fi
       - name: Install Node
         uses: actions/setup-node@v4
         with:
