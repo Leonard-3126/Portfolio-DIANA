@@ -1,6 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
 import { getFirestore, doc, getDoc, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-storage.js";
+import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
 
 /**
  * Módulo API para interactuar con Firebase.
@@ -30,6 +31,20 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const storage = getStorage(app);
+
+// Auth (client-side) — exponemos un wrapper mínimo en window.firebaseAuth
+let auth;
+try {
+    auth = getAuth(app);
+    window.firebaseAuth = {
+        signIn: (email, pass) => signInWithEmailAndPassword(auth, email, pass),
+        signOut: () => auth.signOut && auth.signOut()
+    };
+} catch (e) {
+    // Si auth no está disponible, no bloqueamos el resto de funcionalidades
+    console.warn('Firebase Auth no inicializado:', e && e.message ? e.message : e);
+    window.firebaseAuth = null;
+}
 
 const DOC_PATH = 'portfolio-content/page-data';
 

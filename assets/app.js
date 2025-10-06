@@ -476,16 +476,17 @@ document.addEventListener('DOMContentLoaded', () => {
 			}
 
 			// Si no hay backend o falló, intentar Firebase client-side si está disponible
-			if (window.firebase && firebase.auth && typeof firebase.auth === 'function') {
+			if (window.firebaseAuth && typeof window.firebaseAuth.signIn === 'function') {
 				try {
-					adminStatus && (adminStatus.textContent = 'Autenticando con Firebase...');
-					await firebase.auth().signInWithEmailAndPassword(user, pass);
-					if (adminStatus) adminStatus.textContent = 'Acceso permitido (firebase)';
+					adminStatus && (adminStatus.textContent = 'Autenticando con Firebase (cliente)...');
+					await window.firebaseAuth.signIn(user, pass);
+					if (adminStatus) adminStatus.textContent = 'Acceso permitido (firebase cliente)';
 					document.body.classList.add('is-admin');
 					setTimeout(() => { close(); initAdminEditing(); }, 700);
 					return;
 				} catch (fbErr) {
-					console.warn('Firebase auth falló:', fbErr);
+					console.warn('Firebase client-side auth falló:', fbErr && fbErr.code ? fbErr.code : fbErr);
+					// si falla, seguimos con el fallback local abajo
 				}
 			}
 
