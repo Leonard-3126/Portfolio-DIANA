@@ -1,49 +1,55 @@
-name: Deploy (example)
+name: Deploy to GitHub Pages (Opción A)
 
 on:
   push:
     branches: [ main ]
 
+permissions:
+  contents: read
+  pages: write
+
 jobs:
-  deploy:
+  publish:
+    name: Publish static site to GitHub Pages
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Write service account JSON from secret (supports JSON or BASE64)
-        env:
-          SA_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
-          SA_B64: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_BASE64 }}
-        run: |
-          if [ -n "$SA_JSON" ]; then
-            printf "%s" "$SA_JSON" > serviceAccountKey.json
-          elif [ -n "$SA_B64" ]; then
-            echo "$SA_B64" | base64 --decode > serviceAccountKey.json
-          else
-            echo "No service account secret provided" >&2
-            exit 1
-          fi
-      - name: Install Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Write frontend Firebase API key file (optional)
         env:
           WEB_KEY: ${{ secrets.FIREBASE_WEB_API_KEY }}
           WEB_KEY_B64: ${{ secrets.FIREBASE_WEB_API_KEY_BASE64 }}
         run: |
+          mkdir -p assets
           if [ -n "$WEB_KEY" ]; then
             printf "window.__FIREBASE_API_KEY='%s';\n" "$WEB_KEY" > assets/firebase-config.js
           elif [ -n "$WEB_KEY_B64" ]; then
             echo "$WEB_KEY_B64" | base64 --decode > assets/firebase-config.js
           else
-            echo "No frontend API key provided; continuing with placeholder";
+            echo "No frontend API key provided; continuing without firebase-config.js";
           fi
-      - name: Install deps
-        run: npm ci
-      - name: Start app (example)
-        env:
-          FIREBASE_SERVICE_ACCOUNT_PATH: ${{ github.workspace }}/serviceAccountKey.json
+
+      - name: Prepare public folder (static files)
         run: |
-          # ejemplo: ejecutar tests o desplegar; no recomendado correr server en actions
-          node server.js & sleep 2
-          curl --fail http://localhost:3000/firebase/status
+          rm -rf public
+          mkdir -p public
+          # Copiar los archivos estáticos que quieres publicar. Ajusta según tu estructura.
+          cp -v index.html public/ || true
+          cp -v index1.html public/ || true
+          cp -v gracias.html public/ || true
+          cp -rv assets public/ || true
+          cp -rv fondo public/ || true
+          cp -rv logos public/ || true
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact for GitHub Pages
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: public
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v1
+
