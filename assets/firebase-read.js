@@ -7,11 +7,18 @@ import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "http
  * Centraliza toda la lógica de lectura y escritura.
  */
 
+// La API key del frontend se inyecta en tiempo de build/hosting en
+// `assets/firebase-config.js` como `window.__FIREBASE_API_KEY`.
+// Si no existe, usamos un placeholder (y se emite una advertencia).
+const webApiKey = (typeof window !== 'undefined' && window.__FIREBASE_API_KEY)
+    ? window.__FIREBASE_API_KEY
+    : 'REPLACE_WITH_YOUR_API_KEY';
+if (webApiKey === 'REPLACE_WITH_YOUR_API_KEY') {
+    console.warn('Advertencia: no se encontró la Firebase Web API key. Asegúrate de inyectarla en el build o de configurar assets/firebase-config.js');
+}
+
 const firebaseConfig = {
-    // IMPORTANTE: no dejes la API key aquí en el repositorio público.
-    // Reemplaza por tu propia clave en el entorno de build / hosting.
-    // Placeholder para evitar exposición accidental en el repo:
-    apiKey: "REPLACE_WITH_YOUR_API_KEY",
+    apiKey: webApiKey,
   authDomain: "portfolio-7ade3.firebaseapp.com",
   projectId: "portfolio-7ade3",
   storageBucket: "portfolio-7ade3.firebasestorage.app",

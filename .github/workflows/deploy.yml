@@ -26,6 +26,18 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
+      - name: Write frontend Firebase API key file (optional)
+        env:
+          WEB_KEY: ${{ secrets.FIREBASE_WEB_API_KEY }}
+          WEB_KEY_B64: ${{ secrets.FIREBASE_WEB_API_KEY_BASE64 }}
+        run: |
+          if [ -n "$WEB_KEY" ]; then
+            printf "window.__FIREBASE_API_KEY='%s';\n" "$WEB_KEY" > assets/firebase-config.js
+          elif [ -n "$WEB_KEY_B64" ]; then
+            echo "$WEB_KEY_B64" | base64 --decode > assets/firebase-config.js
+          else
+            echo "No frontend API key provided; continuing with placeholder";
+          fi
       - name: Install deps
         run: npm ci
       - name: Start app (example)
