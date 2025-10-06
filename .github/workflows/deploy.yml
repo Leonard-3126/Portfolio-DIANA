@@ -42,6 +42,17 @@ jobs:
           cp -rv fondo public/ || true
           cp -rv logos public/ || true
 
+      - name: Debug: listar public y mostrar firebase-config (solo para diagnóstico)
+        run: |
+          echo "=== listar public ==="
+          ls -la public || true
+          echo "=== tamaño de public ==="
+          du -sh public || true
+          echo "=== mostrar public/index.html (primeras 200 líneas) ==="
+          if [ -f public/index.html ]; then sed -n '1,200p' public/index.html; else echo "no public/index.html"; fi
+          echo "=== mostrar assets/firebase-config.js (si existe) ==="
+          if [ -f assets/firebase-config.js ]; then sed -n '1,200p' assets/firebase-config.js; else echo "no assets/firebase-config.js"; fi
+
       - name: Configure Pages
         uses: actions/configure-pages@v4
 
