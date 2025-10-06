@@ -116,8 +116,8 @@ app.get('/api/projects', async (req, res) => {
 	}
 });
 
-/* NUEVO: endpoint para login admin que consulta Firestore usando bcrypt */
-const bcrypt = require('bcrypt');
+/* NUEVO: endpoint para login admin que consulta Firestore usando bcryptjs (sin compilación nativa) */
+const bcrypt = require('bcryptjs');
 app.post('/admin/login', async (req, res) => {
 	try {
 		if (!firestore) return res.status(503).json({ ok: false, msg: 'Auth service no disponible' });
@@ -134,14 +134,15 @@ app.post('/admin/login', async (req, res) => {
 
 		// Si la contraseña está en texto plano, migramos a hash automáticamente
 		if (stored && !stored.startsWith('$2')) {
-			// hash actual y actualizar documento
-			const hash = await bcrypt.hash(stored, 10);
+			// hash actual y actualizar documento (bcryptjs usa hashSync aquí)
+			const hash = bcrypt.hashSync(stored, 10);
 			await docRef.update({ password: hash });
 			// reemplazamos stored para comprobar
 			data.password = hash;
 		}
 
-		const match = await bcrypt.compare(pass, data.password || '');
+		// comparar (bcryptjs compareSync)
+		const match = bcrypt.compareSync(pass, data.password || '');
 		if (match) {
 			return res.json({ ok: true });
 		} else {
