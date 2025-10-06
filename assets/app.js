@@ -451,13 +451,23 @@ document.addEventListener('DOMContentLoaded', () => {
 				}
 			}
 
-			// primer intento: ruta relativa (útil cuando backend y frontend están en mismo host/puerto)
-			let result = await tryServerLogin('/admin/login');
+			// Detectar si estamos en un entorno hospedado (GitHub Pages u otro host público).
+			// En Pages no hay backend para /admin/login, así que saltamos los intentos server-side
+			const hostname = (typeof window !== 'undefined' && window.location && window.location.hostname) ? window.location.hostname : '';
+			const isHosted = hostname && hostname !== 'localhost' && hostname !== '127.0.0.1';
 
-			// si el servidor está sirviendo archivos estáticos (ej. live-server) puede devolver 405 o fallar; intentar backend en localhost:3000
-			if (!result.ok && (result.status === 405 || result.status === 0)) {
-				console.warn('Primer intento /admin/login falló, reintentando en http://localhost:3000/admin/login', result);
-				result = await tryServerLogin('http://localhost:3000/admin/login');
+			let result = { ok: false, status: 0 };
+			if (!isHosted) {
+				// primer intento: ruta relativa (útil cuando backend y frontend están en mismo host/puerto)
+				result = await tryServerLogin('/admin/login');
+
+				// si el servidor está sirviendo archivos estáticos (ej. live-server) puede devolver 405 o fallar; intentar backend en localhost:3000
+				if (!result.ok && (result.status === 405 || result.status === 0)) {
+					console.warn('Primer intento /admin/login falló, reintentando en http://localhost:3000/admin/login', result);
+					result = await tryServerLogin('http://localhost:3000/admin/login');
+				}
+			} else {
+				console.info('Entorno hospedado detectado (', hostname, '), saltando intentos server-side y usando Firebase cliente.');
 			}
 
 			// procesar resultado del servidor
