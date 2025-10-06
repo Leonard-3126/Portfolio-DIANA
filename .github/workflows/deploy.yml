@@ -1,0 +1,29 @@
+name: Deploy (example)
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Write service account JSON from secret
+        env:
+          SA_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          echo "$SA_JSON" > serviceAccountKey.json
+      - name: Install Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Install deps
+        run: npm ci
+      - name: Start app (example)
+        env:
+          FIREBASE_SERVICE_ACCOUNT_PATH: ${{ github.workspace }}/serviceAccountKey.json
+        run: |
+          # ejemplo: ejecutar tests o desplegar; no recomendado correr server en actions
+          node server.js & sleep 2
+          curl --fail http://localhost:3000/firebase/status

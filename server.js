@@ -116,7 +116,8 @@ app.get('/api/projects', async (req, res) => {
 	}
 });
 
-/* NUEVO: endpoint para login admin que consulta Firestore */
+/* NUEVO: endpoint para login admin que consulta Firestore usando bcrypt */
+const bcrypt = require('bcrypt');
 app.post('/admin/login', async (req, res) => {
 	try {
 		if (!firestore) return res.status(503).json({ ok: false, msg: 'Auth service no disponible' });
@@ -124,13 +125,24 @@ app.post('/admin/login', async (req, res) => {
 		const { user, pass } = req.body || {};
 		if (!user || !pass) return res.status(400).json({ ok: false, msg: 'Faltan credenciales' });
 
-		const doc = await firestore.collection('admins').doc(user).get();
+		const docRef = firestore.collection('admins').doc(user);
+		const doc = await docRef.get();
 		if (!doc.exists) return res.status(401).json({ ok: false, msg: 'Credenciales inválidas' });
 
 		const data = doc.data() || {};
-		// Actualmente comparación directa; en producción compara hashes (bcrypt)
-		if (data.password === pass) {
-			// opcional: generar y devolver token aquí
+		const stored = data.password || '';
+
+		// Si la contraseña está en texto plano, migramos a hash automáticamente
+		if (stored && !stored.startsWith('$2')) {
+			// hash actual y actualizar documento
+			const hash = await bcrypt.hash(stored, 10);
+			await docRef.update({ password: hash });
+			// reemplazamos stored para comprobar
+			data.password = hash;
+		}
+
+		const match = await bcrypt.compare(pass, data.password || '');
+		if (match) {
 			return res.json({ ok: true });
 		} else {
 			return res.status(401).json({ ok: false, msg: 'Credenciales inválidas' });
