@@ -880,3 +880,84 @@ section#proyectos .projects-cta{
 	box-shadow: 0 0 0 4px rgba(122,92,255,0.12);
 	border-radius:4px;
 }
+
+/* Mobile: mejorar experiencia del modal de contacto */
+@media (max-width:600px) {
+	/* ocupar toda la pantalla y permitir scroll interno si el contenido es largo */
+	.modal {
+		width: 100%;
+		max-width: 100%;
+		height: 100vh;
+		max-height: 100vh;
+		margin: 0;
+		border-radius: 0;
+		box-shadow: none;
+	}
+
+	.modal-inner {
+		display: flex;
+		flex-direction: column;
+		/* asegurar que el contenedor ocupe toda la altura para que el overflow funcione */
+		height: 100%;
+		overflow-y: auto; /* scroll interno para evitar recortes */
+		-webkit-overflow-scrolling: touch; /* smooth scrolling en iOS */
+		overscroll-behavior: contain; /* mantener el scroll contenido dentro del modal */
+	}
+
+	.modal-left, .modal-right {
+		padding: 18px 16px;
+	}
+
+	.modal-left {
+		order: 0;
+		align-items: center;
+		text-align: center;
+		/* reducir espacio entre elementos en móvil */
+		gap: 6px;
+		padding-top: 12px;
+		padding-bottom: 12px;
+	}
+
+	.modal-left h3 { font-size: 18px; margin: 0; line-height: 1.05; }
+	.modal-lead { margin: 0; font-size: 13px; opacity: 0.95; }
+	.modal-left .contact-info { width: 100%; }
+	.modal-left .ci-row { text-align: center; margin: 4px 0; font-size: 13px; }
+
+	.follow-buttons { justify-content: center; }
+
+	/* Formularios: inputs y textarea cómodos y a ancho completo */
+	.modal-right { order: 1; }
+	.modal-right input,
+	.modal-right textarea {
+		font-size: 16px;
+		padding: 12px 14px;
+	}
+
+	/* permitir que la columna del formulario tenga su propio scroll si el formulario es muy alto */
+	.modal-right { max-height: calc(100vh - 120px); overflow-y: auto; -webkit-overflow-scrolling: touch; }
+
+	.row { flex-direction: column; gap: 12px; }
+	.row label { width: 100%; }
+
+	/* Acciones en columna y botón grande para tap */
+	.form-actions { flex-direction: column; gap: 12px; align-items: stretch; }
+	.btn-send { width: 100%; padding: 14px; font-size: 16px; }
+
+	/* reducir padding del overlay en móvil para que el modal ocupe toda la pantalla correctamente */
+	.modal-overlay { padding: 8px; }
+}
+
+/* Tablet: permitir modal con máximo alto y scroll si el contenido excede */
+@media (min-width:601px) and (max-width:920px) {
+	.modal { max-height: 88vh; }
+	.modal-inner { overflow-y: auto; }
+}
+
+/* Cuando un modal está abierto, fijar el body para evitar scroll del fondo
+   usando top negativo para preservar la posición y permitir scroll dentro del modal. */
+body.modal-open {
+	position: fixed;
+	left: 0;
+	right: 0;
+	overflow: hidden;
+}

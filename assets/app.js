@@ -351,15 +351,21 @@ document.addEventListener('DOMContentLoaded', () => {
 		const modal = document.getElementById('contactModal');
 		if (!modal) return;
 		const closeBtn = modal.querySelector('.modal-close');
+		let _modalScrollPos = 0;
 		function open() {
+			// preservar posición y fijar el body para bloquear fondo sin impedir scroll interno del modal
+			_modalScrollPos = window.scrollY || document.documentElement.scrollTop || 0;
+			document.body.style.top = `-${_modalScrollPos}px`;
+			document.body.classList.add('modal-open');
 			modal.setAttribute('aria-hidden', 'false');
-			document.body.style.overflow = 'hidden';
 			const first = modal.querySelector('input,textarea,button');
 			if (first) first.focus();
 		}
 		function close() {
 			modal.setAttribute('aria-hidden', 'true');
-			document.body.style.overflow = '';
+			document.body.classList.remove('modal-open');
+			document.body.style.top = '';
+			window.scrollTo(0, _modalScrollPos);
 			const status = modal.querySelector('#formStatus');
 			if (status) status.textContent = '';
 		}
@@ -392,16 +398,22 @@ document.addEventListener('DOMContentLoaded', () => {
 		const ADMIN_USER = 'admin';
 		const ADMIN_PASS = 'admin123';
 
+		let _adminScrollPos = 0;
 		function open() {
+			// bloquear fondo usando clase para preservar mejor comportamiento en móviles
+			_adminScrollPos = window.scrollY || document.documentElement.scrollTop || 0;
+			document.body.style.top = `-${_adminScrollPos}px`;
+			document.body.classList.add('modal-open');
 			adminModal.setAttribute('aria-hidden', 'false');
-			document.body.style.overflow = 'hidden';
 			const first = adminModal.querySelector('input');
 			if (first) first.focus();
 			if (adminStatus) adminStatus.textContent = '';
 		}
 		function close() {
 			adminModal.setAttribute('aria-hidden', 'true');
-			document.body.style.overflow = '';
+			document.body.classList.remove('modal-open');
+			document.body.style.top = '';
+			window.scrollTo(0, _adminScrollPos);
 			if (adminStatus) adminStatus.textContent = '';
 		}
 
@@ -545,4 +557,61 @@ document.addEventListener('DOMContentLoaded', () => {
 	// Eliminada la llamada a loadProjects para mantener las tarjetas estáticas
 	if (typeof initModal === 'function') initModal();
 	if (typeof initForm === 'function') initForm();
+
+	// Contact form: submit via hidden iframe so we can show an in-page confirmation
+	function initContactForm() {
+		const form = document.getElementById('contactForm');
+		if(!form) return;
+
+		// create or reuse hidden iframe
+		let iframe = document.getElementById('contact_iframe');
+		if(!iframe) {
+			iframe = document.createElement('iframe');
+			iframe.style.display = 'none';
+			iframe.name = 'contact_iframe';
+			iframe.id = 'contact_iframe';
+			document.body.appendChild(iframe);
+		}
+
+		// ensure form target points to the iframe so user stays on page
+		form.setAttribute('target', iframe.name);
+
+		// helper to show confirmation message (reuses #formSentMsg if present)
+		function showSentMsg() {
+			const msg = document.getElementById('formSentMsg');
+			if(msg) {
+				msg.style.display = 'block';
+				setTimeout(() => { msg.style.display = 'none'; }, 3500);
+				return;
+			}
+			// fallback: small toast
+			const toast = document.createElement('div');
+			toast.textContent = '¡Mensaje enviado correctamente!';
+			Object.assign(toast.style, {
+				position: 'fixed',
+				right: '16px',
+				bottom: '22px',
+				background: '#27ae60',
+				color: '#fff',
+				padding: '10px 14px',
+				borderRadius: '8px',
+				zIndex: 2200,
+				fontWeight: 700,
+			});
+			document.body.appendChild(toast);
+			setTimeout(() => { document.body.removeChild(toast); }, 3200);
+		}
+
+		// When form is submitted, show the sent message after a short delay.
+		// The actual POST will happen in the iframe; we keep the user on the page.
+		form.addEventListener('submit', function(e) {
+			// allow the native submit to proceed to the iframe
+			setTimeout(() => { showSentMsg();
+				// optionally reset form fields if desired
+				try { form.reset(); } catch(err){}
+			}, 400);
+		});
+	}
+
+	initContactForm();
 });
